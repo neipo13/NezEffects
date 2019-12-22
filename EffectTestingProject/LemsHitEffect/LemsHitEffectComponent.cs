@@ -27,7 +27,7 @@ namespace EffectTestingProject.LemsHitEffect
 
         private float[] lineAngles;
         
-
+        //overriding because renderablecomponent requires it - just set it real huge so it never gets culled
         public override RectangleF Bounds => new RectangleF(this.Entity.Position, new Vector2(NezGame.designWidth, NezGame.designHeight));
 
         public void Start(int numberOfLines = 3)
@@ -37,18 +37,12 @@ namespace EffectTestingProject.LemsHitEffect
             lineAngles = new float[numberOfLines];
             for(int i = 0; i < numberOfLines; i++)
             {
-                float angle= Nez.Random.NextAngle();
-
+                //TODO: make sure the angles are somewhat properly spaced apart
+                // maybe get a totally random first angle and set the others based on an even spacing 
+                // then shift each one slightly randomly based on how large the spaces are (give maybe 25% leeway on either end?)
                 lineAngles[i] = Nez.Random.NextAngle();
             }
         }
-
-        //private bool IsValidAngleToAdd(float angle, int totalNumAngles)
-        //{
-        //    if (lineAngles.Any(a => Math.Abs(angle - a) < ((float)Math.PI * 2f / totalNumAngles))) return false;
-        //    return true;
-        //}
-
 
         public void Update()
         {
@@ -65,7 +59,6 @@ namespace EffectTestingProject.LemsHitEffect
             var lifePercent = 1 - (lifeTimer / LIFETIME);
             //circle effect
             batcher.DrawCircle(this.Entity.Position, circleRadius * (lifeTimer / LIFETIME), color, circleThickness * lifePercent, circleResolution);
-            //batcher.DrawPolygon(this.Entity.Position, CreateCircle(radius * (lifeTimer / LIFETIME), 100), color, true, thickness * (1 - (lifeTimer / LIFETIME)));
             //lines
             if (lineAngles != null && lineAngles.Length > 0)
             {
