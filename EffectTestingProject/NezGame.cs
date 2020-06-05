@@ -24,7 +24,7 @@ namespace EffectTestingProject
         protected override void Initialize()
         {
             base.Initialize();
-            Scene = new Scenes.WombatSmoke();
+            Scene = new Scenes.LemsDepthArm();
         }
     }
 }

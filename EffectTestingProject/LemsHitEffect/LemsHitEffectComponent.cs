@@ -43,6 +43,12 @@ namespace EffectTestingProject.LemsHitEffect
                 lineAngles[i] = Nez.Random.NextAngle();
             }
         }
+        public void Start(float[] angles)
+        {
+            this._isVisible = true;
+            lifeTimer = 0f;
+            lineAngles = angles;
+        }
 
         public void Update()
         {
